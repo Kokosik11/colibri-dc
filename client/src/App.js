@@ -1,5 +1,5 @@
-import React from 'react';
-import Auth from './auth';
+import React, { Component } from 'react';
+import { Auth } from './auth';
 import {
     Route,
     Switch,
@@ -12,16 +12,20 @@ function Test() {
     )
 }
 
-function App() {
-    return (
-        <div className="App">
-            <Switch>
-                <Route path="/" component={Auth}/>
-                <Route path="/test" component={Test}/>
-                {/* <Redirect from='/' to='/test'/> */}
-            </Switch>
-        </div>
-    );
+class App extends Component {
+    render() {
+        const { history } = this.props
+
+        return (
+            <div className="App">
+                <Switch>
+                    <Route exact history={history} path="/" component={Auth}/>
+                    <Route exact history={history} path="/test" component={Test}/>
+                    {/* <Redirect from='/' to='/test'/> */}
+                </Switch>
+            </div>
+        );
+    }
 }
 
 export default withRouter(App);

@@ -4,10 +4,19 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const PORT = config.get('Server.port') || 3001;
+const { PORT } = config.get('Server') || 3001;
 // const mongoURI = config.get('mongoURI');
 
 const { mongoURI } = config.get('DB');
+
+app.use(express.json({ extended: true}))
+
+app.get('/test1', (req, res) => {
+    let data = {
+        message: "asdsd"
+    }
+    res.json(data)
+})
 
 mongoose.connect(mongoURI, { 
     useNewUrlParser: true,
